@@ -1,7 +1,7 @@
 #!/bin/sh
 
 export ROOT=$(pwd)
-export SKYNET_ROOT=$(pwd)'/cloud/skynet/skynet'
+export SKYNET_ROOT=$(pwd)'/cloud/skynet'
 
 export DAEMON=false
 export NODENAME='"test"'
