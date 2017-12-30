@@ -139,9 +139,9 @@ function root.on_message(addr, url, method, headers, path, query, body, fd)
     
     
     -- 解析命令  并转发给 NetWork 中转处理 
-    local gameconstants = require "gate.frontend.config.gameconstants";
+    local gameconstants = require "app.config.gameconstants";
     if path == gameconstants.NetHttp_ACTION_WS then --http 连接 
-          local netwebsocket = require "gate.frontend.server.netwebsocket"
+          local netwebsocket = require "app.server.netwebsocket"
           netwebsocket.start(m_srv_net_work,req, res);
      else
           skynet.call(m_srv_net_work, "lua", "command_http_handler",path,req, res, skynet.self())

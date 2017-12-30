@@ -5,7 +5,7 @@
 
 ]]
 local skynet = require "skynet"
-local gameconstants = require "gate.frontend.config.gameconstants";
+local gameconstants = require "app.config.gameconstants";
 
 local root = {}
 

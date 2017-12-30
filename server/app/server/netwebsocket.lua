@@ -2,7 +2,7 @@ local skynet = require "skynet"
 --local proto = require "gate.frontend.proto"
 --local app = require "gate.frontend.app"
 local websocket = require "websocket"
-require "gate.frontend.util.function"
+--require ".util.function"
 
 --local CMD = {}
 local SOCKET_TO_CLIENT = {}

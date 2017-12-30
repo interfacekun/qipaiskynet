@@ -11,7 +11,7 @@ local User ={
 
 
 
-require "gate.frontend.util.function";
+--require "gate.frontend.util.function";
 local UserList ={}
 local users ={};
 
