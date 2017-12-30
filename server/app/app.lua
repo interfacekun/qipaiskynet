@@ -1,7 +1,7 @@
 local skynet = require "skynet"
 
 
-require "gate.frontend.util.function"
+require "lualib.init"
 --local wsapp = require "frontend.server.wsapp"
 
 local app ={}

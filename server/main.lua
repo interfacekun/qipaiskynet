@@ -1,10 +1,10 @@
 local skynet = require "skynet"
 require "skynet.manager"
-local etcd = require "etcd"
-local hotfix = require "hotfix"
-local rpc_mysql = require "rpc_mysql"
-local rpc_redis = require "rpc_redis"
-app =  require "gate.frontend.app"
+--local etcd = require "etcd"
+--local hotfix = require "hotfix"
+--local rpc_mysql = require "rpc_mysql"
+--local rpc_redis = require "rpc_redis"
+app =  require "app.app"
 
 skynet.start(function ()
 --    skynet.uniqueservice("srv_logger_sup")
@@ -23,9 +23,9 @@ skynet.start(function ()
 
     -- 获取配置环境
     local env = skynet.getenv("env")
-    local config = require('config.' .. env .. ".gate")
-    local backend_port = config.etcdcf.backend.port
-    local frontend_port = config.etcdcf.frontend.port
+    local config = require('config.' .. env .. ".server")
+--    local backend_port = config.etcdcf.backend.port
+    local port = config.etcdcf.server.port
     skynet.setenv("gate_etcd", config.etcdfile)
     app.new();
 
@@ -39,7 +39,7 @@ skynet.start(function ()
 
     --启动net的中转命令服务
     local srv_net_work = skynet.newservice("srv_net_work")
-    local nethttp_handle = hotfix.start_hotfix_service("skynet", "srv_net_http", frontend_port,  65536,srv_net_work)
+    local nethttp_handle = skynet.newservice("skynet", "srv_net_http", port,  65536,srv_net_work)
 --    hotfix.start_hotfix_service("skynet", "srv_web", backend_port, "gate.backend.webapp", 65536)
 --    hotfix.start_hotfix_service("skynet", "srv_web", frontend_port, "gate.frontend.webapp", 65536 * 2)
     -- 启动socket服务
