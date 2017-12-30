@@ -39,7 +39,7 @@ skynet.start(function ()
 
     --启动net的中转命令服务
     local srv_net_work = skynet.newservice("srv_net_work")
-    local nethttp_handle = skynet.newservice("skynet", "srv_net_http", port,  65536,srv_net_work)
+    local nethttp_handle = skynet.newservice("skynet", "app/service/srv_net_http", port,  65536,srv_net_work)
 --    hotfix.start_hotfix_service("skynet", "srv_web", backend_port, "gate.backend.webapp", 65536)
 --    hotfix.start_hotfix_service("skynet", "srv_web", frontend_port, "gate.frontend.webapp", 65536 * 2)
     -- 启动socket服务

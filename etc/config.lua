@@ -1,6 +1,6 @@
 cloudroot="./cloud/"
 skynetroot = cloudroot .. "skynet/"
---gameroot = "./server/gate/app/"
+gameroot = "./server/app/"
 
 --thread 启动多少个工作线程。通常不要将它配置超过你实际拥有的 CPU 核心数。
 thread = 8 
@@ -47,10 +47,10 @@ lua_cpath = skynetroot .. "luaclib/?.so;" .. cloudroot .."luaclib/?.so"
 
 
 
-gameservice ="./server/?.lua;" --"./service/?.lua;" ..
+gameservice ="./server/?.lua;".. --"./service/?.lua;" ..
 --            cloudroot.."service/?.lua;" ..
 --            "./test/?.lua;" --.. 
---            gameroot.."server/?.lua;"
+            gameroot.."server/?.lua;"
 luaservice = skynetroot.."service/?.lua;" .. gameservice
 
 --用 snax 框架编写的服务的查找路径。
