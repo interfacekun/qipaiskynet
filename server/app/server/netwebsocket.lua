@@ -128,7 +128,8 @@ function root.on_message(ws, msg)
 end
 
 function root.on_error(ws, msg)
-    print("netwebsocket.lua = > on_error (".. ws.fd ..":" ..msg..")");
+    print("netwebsocket.lua = > on_error (".. ws.fd..")");
+    print(msg);
     local fd = ws.fd
     local client =  SOCKET_TO_CLIENT[fd]
     if not client then
