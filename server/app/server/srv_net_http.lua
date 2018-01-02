@@ -66,6 +66,7 @@ end
 
 ------------------------------- private  -----------
 --local skynet = require "skynet"
+local urllib = require "http.url"
 local httpd = require "http.httpd"
 local websocket = require "websocket"
 local socket = require "skynet.socket"
