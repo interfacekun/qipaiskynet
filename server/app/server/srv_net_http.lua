@@ -130,7 +130,7 @@ function root.on_message(addr, url, method, headers, path, query, body, fd)
     local ip, _ = addr:match("([^:]+):?(%d*)$")
     local req = {ip = ip, url = url, method = method, headers = headers, 
             path = path, query = query, body = body, fd = fd, addr = addr}
-    local res = {code = 200, body = body, headers = headers,json =nil}
+    local res = {code = 200, body = body, headers = headers,json =""}
 
 
     local trace_err = ""

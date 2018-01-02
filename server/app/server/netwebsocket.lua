@@ -33,7 +33,7 @@ local m_srv_net_work;
  --]]
 function root.start(m_srv_net_work,req, res)
     print("NetWebSocket.lua start => ".. req.fd);
-    m_srv_net_work = NetWork;
+    m_srv_net_work = m_srv_net_work;
     
     local fd = req.fd 
     local ws, err  = websocket.new(req.fd, req.addr, req.headers, root)
