@@ -7,10 +7,10 @@ local root = {
     etcdcf = {
         name = etcdfile,
         server = {
-            ip = "192.168.31.249",
+            ip = "192.168.103.91",
             type = "http",
-            ws = "ws://192.168.31.249:8203/ws",
-            socket = 8303,
+            ws = "ws://192.168.103.91:8203/ws",
+            socket = 8203,
             port = 8203,
         },
     }

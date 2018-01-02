@@ -54,5 +54,5 @@ done
 
 
 
-$SKYNET_ROOT $ROOT/etc/config.lua
+$SKYNET_ROOT $ROOT/config/config.lua
 

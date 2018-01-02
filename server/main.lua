@@ -4,7 +4,10 @@ require "skynet.manager"
 --local hotfix = require "hotfix"
 --local rpc_mysql = require "rpc_mysql"
 --local rpc_redis = require "rpc_redis"
+local datacenter = require "datacenter"
 app =  require "app.app"
+
+
 
 skynet.start(function ()
 --    skynet.uniqueservice("srv_logger_sup")
@@ -39,7 +42,13 @@ skynet.start(function ()
 
     --启动net的中转命令服务
     local srv_net_work = skynet.newservice("srv_net_work")
-    local nethttp_handle = skynet.newservice("srv_net_http", port,  65536,srv_net_work)
+    datacenter.set("server_address", "srv_net_work", srv_net_work)
+    
+    local srv_net_http = skynet.newservice("srv_net_http", port,  65536,srv_net_work)
+    datacenter.set("server_address", "srv_net_http", srv_net_http)
+    
+    
+    
 --    hotfix.start_hotfix_service("skynet", "srv_web", backend_port, "gate.backend.webapp", 65536)
 --    hotfix.start_hotfix_service("skynet", "srv_web", frontend_port, "gate.frontend.webapp", 65536 * 2)
     -- 启动socket服务
