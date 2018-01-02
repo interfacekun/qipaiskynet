@@ -4,7 +4,7 @@ require "skynet.manager"
 --local hotfix = require "hotfix"
 --local rpc_mysql = require "rpc_mysql"
 --local rpc_redis = require "rpc_redis"
-local datacenter = require "datacenter"
+local cluster = require "cluster"
 app =  require "app.app"
 
 
@@ -42,10 +42,10 @@ skynet.start(function ()
 
     --启动net的中转命令服务
     local srv_net_work = skynet.newservice("srv_net_work")
-    datacenter.set("server_address", "srv_net_work", srv_net_work)
+    cluster.register("srv_net_work", srv_net_work)
     
     local srv_net_http = skynet.newservice("srv_net_http", port,  65536,srv_net_work)
-    datacenter.set("server_address", "srv_net_http", srv_net_http)
+    cluster.register("srv_net_http", srv_net_http)
     
     
     
