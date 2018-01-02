@@ -153,12 +153,12 @@ function root.on_message(addr, url, method, headers, path, query, body, fd)
     
     --转发消息 
     local gameconstants = require "app.config.gameconstants";
-    if m_handle_type == gameconstants.HANDLE_TYPE_HTTTP then 
+    if tonumber(m_handle_type) == gameconstants.HANDLE_TYPE_HTTTP then 
        local network =  require "app.server.network";
        res.json = network.command_http_handler(path,req,req,res)
         --skynet.call(m_srv_net_work, "lua", "command_http_handler",path,req, res, skynet.self())
         
-    elseif m_handle_type == gameconstants.HANDLE_TYPE_WEBSOCKET then
+    elseif tonumber(m_handle_type) == gameconstants.HANDLE_TYPE_WEBSOCKET then
     
         if path == gameconstants.NetHttp_ACTION_WS then --http 连接 
               local netwebsocket = require "app.server.netwebsocket"
