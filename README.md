@@ -22,4 +22,6 @@ git submodule foreach git pull
 # 1 ： cloud 下 
 make   macosx 
 
+# 2: 
+killall skynet
 

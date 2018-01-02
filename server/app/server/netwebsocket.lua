@@ -122,7 +122,9 @@ function root.on_message(ws, msg)
       root.send(fd,cf);
       
       
-     skynet.call(m_srv_net_work, "lua", "command_websocket_handler",msg)
+      local network =  require "app.server.network";
+      network.command_websocket_handler(msg)
+     --skynet.call(m_srv_net_work, "lua", "command_websocket_handler",msg)
 end
 
 function root.on_error(ws, msg)
