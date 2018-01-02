@@ -44,7 +44,19 @@ skynet.start(function ()
     local srv_net_work = skynet.newservice("srv_net_work")
     cluster.register("srv_net_work", srv_net_work)
     
-    local srv_net_http = skynet.newservice("srv_net_http", port,  65536,srv_net_work)
+    
+    local fun = function(path,req,req,res)
+            local gameconstants = require "app.config.gameconstants";
+            if path == gameconstants.NetHttp_ACTION_WS then --http 连接 
+                  local netwebsocket = require "app.server.netwebsocket"
+                  netwebsocket.start(srv_net_work,req, res);
+             else
+                  local network =  require "app.server.network";
+                  network.command_http_handler(path,req,req,res)
+                  --skynet.call(m_srv_net_work, "lua", "command_http_handler",path,req, res, skynet.self())
+            end
+    end
+    local srv_net_http = skynet.newservice("srv_net_http", port,  65536,fun)
     cluster.register("srv_net_http", srv_net_http)
     
     

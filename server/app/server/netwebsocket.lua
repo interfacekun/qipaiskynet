@@ -31,7 +31,7 @@ local m_srv_net_work;
   启动webscoket 
   http升级协议成websocket协议
  --]]
-function root.start(NetWork,req, res)
+function root.start(m_srv_net_work,req, res)
     print("NetWebSocket.lua start => ".. req.fd);
     m_srv_net_work = NetWork;
     
@@ -124,7 +124,7 @@ function root.on_message(ws, msg)
       
       local network =  require "app.server.network";
       network.command_websocket_handler(msg)
-     --skynet.call(m_srv_net_work, "lua", "command_websocket_handler",msg)
+      --skynet.call(m_srv_net_work, "lua", "command_websocket_handler",msg)
 end
 
 function root.on_error(ws, msg)
