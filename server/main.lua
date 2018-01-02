@@ -4,7 +4,7 @@ require "skynet.manager"
 --local hotfix = require "hotfix"
 --local rpc_mysql = require "rpc_mysql"
 --local rpc_redis = require "rpc_redis"
-local cluster = require "cluster"
+local cluster = require "skynet.cluster"
 app =  require "app.app"
 
 
