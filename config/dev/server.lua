@@ -1,17 +1,21 @@
 
 
-local etcdfile = "/niuniu/gates/gate1"
+--local etcdfile = "/niuniu/gates/gate1"
 
 local root = {
-    etcdfile = etcdfile,
-    etcdcf = {
-        name = etcdfile,
+--    etcdfile = etcdfile,
+    niuniu = {
+--        name = etcdfile,
         server = {
-            ip = "192.168.103.91",
-            type = "http",
-            ws = "ws://192.168.103.91:8203/ws",
-            socket = 8303,
-            port = 8203,
+            ip_login = "192.168.103.91",
+            port_login = 8203,
+            body_size_limit_login = 8192, --8k限制 
+            
+        
+            ip_websocket = "192.168.103.91",
+            port_websocket = 8303,
+            body_size_limit_websocket = 65536,
+            
         },
     }
 }

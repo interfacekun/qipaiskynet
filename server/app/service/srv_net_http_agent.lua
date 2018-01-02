@@ -1,18 +1,29 @@
 local skynet = require "skynet"
 local socket = require "skynet.socket"
-local httpd = require "http.httpd"
-local sockethelper = require "http.sockethelper"
-local urllib = require "http.url"
+local helper_net_http = require "app.servicehelper.helper_net_http"
 
 
 
 local CMD = {}
+local SOCKET_NUMBER = 0 --socket连接数目
 
 
 
-
+-- 处理socket 收到的消息     
 function CMD.on_socket( fd, addr)
+    SOCKET_NUMBER = SOCKET_NUMBER + 1
+    socket.start(fd)
     
+  
+    
+    
+    helper_net_http.on_socket( fd, addr);
+    
+    
+    
+    
+    socket.close(fd)
+    SOCKET_NUMBER = SOCKET_NUMBER - 1
 end
 
 

@@ -29,7 +29,6 @@ skynet.start(function ()
     local env = skynet.getenv("env")
     local config = require('config.' .. env .. ".server")
 --    local backend_port = config.etcdcf.backend.port
-    local port = config.etcdcf.server.port
     skynet.setenv("gate_etcd", config.etcdfile)
     app.new();
 
@@ -39,14 +38,25 @@ skynet.start(function ()
 --    local handle = hotfix.start_hotfix_service("skynet", "gate/service/srv_room_sup")
 --    skynet.name(".room", handle)  
 
-    -- 启动frontend, backend web服务
+
+
 
     --启动net的中转命令服务
     local srv_net_work = skynet.newservice("srv_net_work")
     cluster.register("srv_net_work", srv_net_work)
     
-    --启动websocket
-    local srv_net_http = skynet.newservice("srv_net_http", port,  65536,"agent",gameconstants.HANDLE_TYPE_WEBSOCKET)
+    
+    --启动负载均衡的登录服务
+    local port_login = config.etcdcf.server.port_login
+    local body_size_limit_login = config.etcdcf.server.body_size_limit_login
+    local srv_net_http_login = skynet.newservice("srv_net_http", port_login,  body_size_limit_login,"agent",gameconstants.HANDLE_TYPE_HTTTP)
+    cluster.register("srv_net_http_login", srv_net_http_login)
+    
+    
+    
+    --启动websocket服务
+    local port_websocket = config.etcdcf.server.port_websocket
+    local srv_net_http = skynet.newservice("srv_net_http", port_websocket,  65536,nil,gameconstants.HANDLE_TYPE_WEBSOCKET)
     cluster.register("srv_net_http", srv_net_http)
     
     

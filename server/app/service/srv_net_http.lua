@@ -44,24 +44,13 @@ function root.start(port, body_size_limit,mode,handle_type)
    
   
   if mode == "agent" then
-      skynet.start(function()
-         local id = socket.listen("0.0.0.0", port)
-          -- local id = socket.listen("127.0.0.1",port)
-          listen_id = id
-          skynet.error("Listen web port ", port)
-          socket.start(id , function(fd, addr)
-                root.on_socket( fd, addr)
-          end)
-      end)
-      
-  else
-  
-      
+     
+     
       --负载均衡处理
       local agent = {}
       for i= 1, 20 do
         -- 启动 20 个代理服务用于处理 http 请求
-        agent[i] = skynet.newservice("srv_http_agent")
+        agent[i] = skynet.newservice("srv_net_http_agent")
         --agent[i] = skynet.newservice(SERVICE_NAME, "agent")  
       end
       
@@ -77,6 +66,21 @@ function root.start(port, body_size_limit,mode,handle_type)
               balance = 1
             end
        end)
+       
+       
+      
+  else
+  
+      skynet.start(function()
+         local id = socket.listen("0.0.0.0", port)
+          -- local id = socket.listen("127.0.0.1",port)
+          listen_id = id
+          skynet.error("Listen web port ", port)
+          socket.start(id , function(fd, addr)
+                root.on_socket( fd, addr)
+          end)
+      end)
+      
   
   
   end
