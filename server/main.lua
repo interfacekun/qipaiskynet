@@ -29,7 +29,8 @@ skynet.start(function ()
     local env = skynet.getenv("env")
     local config = require('config.' .. env .. ".server")
 --    local backend_port = config.etcdcf.backend.port
-    skynet.setenv("gate_etcd", config.etcdfile)
+    -- print(config.etcd);
+    -- skynet.setenv("gate_etcd", config.etcd)
     app.new();
 
 
@@ -47,17 +48,18 @@ skynet.start(function ()
     
     
     --启动负载均衡的登录服务
-    local port_login = config.etcdcf.server.port_login
-    local body_size_limit_login = config.etcdcf.server.body_size_limit_login
-    local srv_net_http_login = skynet.newservice("srv_net_http", port_login,  body_size_limit_login,"agent",gameconstants.HANDLE_TYPE_HTTTP)
+    local port_login = config.niuniu.server.port_login
+    local body_size_limit_login = config.niuniu.server.body_size_limit_login
+    local srv_net_http_login = skynet.newservice("srv_net_http", port_login,  body_size_limit_login,"agent",gameconstants.HANDLE_TYPE_HTTTP,nil)
     cluster.register("srv_net_http_login", srv_net_http_login)
     
     
     
     --启动websocket服务
-    local port_websocket = config.etcdcf.server.port_websocket
-    local srv_net_http = skynet.newservice("srv_net_http", port_websocket,  65536,nil,gameconstants.HANDLE_TYPE_WEBSOCKET)
-    cluster.register("srv_net_http", srv_net_http)
+    local port_websocket = config.niuniu.server.port_websocket    
+    local body_size_limit_websocket = config.niuniu.server.body_size_limit_websocket
+    local srv_net_http_websocket = skynet.newservice("srv_net_http", port_websocket,  body_size_limit_websocket,nil,gameconstants.HANDLE_TYPE_WEBSOCKET,nil)
+    cluster.register("srv_net_http_websocket", srv_net_http_websocket)
     
     
     

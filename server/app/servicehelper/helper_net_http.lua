@@ -96,7 +96,7 @@ function root.on_message(addr, url, method, headers, path, query, body, fd)
     local ip =req.ip
     local url =req.url
     local path = req.path;
-    print(" NetHttp.lua => method:"..method,",path:"..path,",addr:"..addr,",fd:"..fd,",ip:"..ip,",url:"..url);
+    print(" helper_net_http.lua => method:"..method,",path:"..path,",addr:"..addr,",fd:"..fd,",ip:"..ip,",url:"..url);
     
     
    

@@ -1,11 +1,11 @@
 
 
---local etcdfile = "/niuniu/gates/gate1"
+-- local etcdfile = "/niuniu/gates/gate1"
 
 local root = {
---    etcdfile = etcdfile,
+   -- etcdfile = etcdfile,
     niuniu = {
---        name = etcdfile,
+       -- name = etcdfile,
         server = {
             ip_login = "192.168.103.91",
             port_login = 8203,
