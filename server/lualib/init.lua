@@ -1,3 +1,0 @@
-
-
-require "lualib.util.function"

@@ -16,10 +16,12 @@ local CMD = {}
 
 -- 监听http 
 function CMD.command_http_handler(cmd, action,req,res)
+  local ret = nil
   print("command_http_handler : ",action);
   if action == gameconstants.NetHttp_ACTION_WS then --http 连接 
         
   end
+  return ret 
 end
 
 
@@ -43,7 +45,7 @@ function CMD.command_websocket_handler(cmd, action,...)
 end
 -- 发送  websocket 
 function CMD.command_websocket_send(fd, data)
-     local netwebsocket = require "app.server.netwebsocket"
+     local netwebsocket = require "app.servicehelper.netwebsocket"
      netwebsocket.send(fd,data);
 end
 

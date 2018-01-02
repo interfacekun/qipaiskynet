@@ -32,7 +32,7 @@ local m_srv_net_work;
   http升级协议成websocket协议
  --]]
 function root.start(m_srv_net_work,req, res)
-    print("NetWebSocket.lua start => ".. req.fd);
+     print("netwebsocket.lua = > start (".. req.fd..")");
     m_srv_net_work = m_srv_net_work;
     
     local fd = req.fd 
@@ -98,7 +98,7 @@ end
 
 ------------ private  ---------------
 function root.on_open(ws)
-    print("NetWebSocket.lua on_open");
+    print("netwebsocket.lua = > on_open (".. ws.fd ..")");
     skynet.error(string.format("Client connected: %s", ws.addr))
     local fd = ws.fd
     local ip = ws.addr:match("([^:]+):?(%d*)$")
@@ -108,7 +108,7 @@ function root.on_open(ws)
 end
 
 function root.on_message(ws, msg)
-    print("NetWebSocket.lua 接收到消息");
+    print("netwebsocket.lua = > on_message (".. ws.fd ..")");
     print(msg);
     local fd = ws.fd
     local client =  SOCKET_TO_CLIENT[fd]
@@ -122,7 +122,7 @@ function root.on_message(ws, msg)
       root.send(fd,cf);
       
       
-      local network =  require "app.server.network";
+      local network =  require "app.servicehelper.network";
       network.command_websocket_handler(msg)
       --skynet.call(m_srv_net_work, "lua", "command_websocket_handler",msg)
 end

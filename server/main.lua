@@ -45,8 +45,8 @@ skynet.start(function ()
     local srv_net_work = skynet.newservice("srv_net_work")
     cluster.register("srv_net_work", srv_net_work)
     
-   
-    local srv_net_http = skynet.newservice("srv_net_http", port,  65536,gameconstants.HANDLE_TYPE_WEBSOCKET)
+    --启动websocket
+    local srv_net_http = skynet.newservice("srv_net_http", port,  65536,"agent",gameconstants.HANDLE_TYPE_WEBSOCKET)
     cluster.register("srv_net_http", srv_net_http)
     
     

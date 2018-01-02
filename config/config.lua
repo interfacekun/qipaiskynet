@@ -47,10 +47,10 @@ lua_cpath = skynetroot .. "luaclib/?.so;" .. cloudroot .."luaclib/?.so"
 
 
 
-gameservice ="./server/?.lua;".. --"./service/?.lua;" ..
+gameservice ="./service/?.lua;".. --"./service/?.lua;" ..
 --            cloudroot.."service/?.lua;" ..
 --            "./test/?.lua;" --.. 
-            gameroot.."server/?.lua;"
+            gameroot.."service/?.lua;"
 luaservice = skynetroot.."service/?.lua;" .. gameservice
 
 --用 snax 框架编写的服务的查找路径。

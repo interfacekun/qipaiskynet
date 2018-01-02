@@ -1,70 +1,24 @@
 local skynet = require "skynet"
-local socket = require "skynet.socket"
+--local socket = require "skynet.socket"
 --local httpd = require "http.httpd"
 --local sockethelper = require "http.sockethelper"
 --local urllib = require "http.url"
+local gameconstants = require "app.config.gameconstants";
+local network =  require "app.server.network";
+    
 
+local  m_body_size_limit , m_handle_type,m_srv_net_work ; 
 
-
---[[
-NetHttp.lua
- 
-  NetHttp 的上层分装处理 
-  主要有：
-      start
-      send
-      close
-      exit
-      
-      on_message
---]]
-local m_port,  m_body_size_limit , m_handle_type,m_srv_net_work = ...  -- NetWork服务类  端口   最大连接数   HTTP类型   收到消息的中转处理 
 
 
 local root = {}
 
 
-
-local listen_id = nil;--监听id
-local SOCKET_NUMBER = 0 --socket连接数目
-
-
-
---构造函数 
-function root.start(port, body_size_limit,handle_type)
-    m_port = port
+--吧基础的数据丢进来 
+function root.init( body_size_limit,handle_type)
    m_body_size_limit = body_size_limit
    m_handle_type = handle_type;
-  
-  skynet.start(function()
-     local id = socket.listen("0.0.0.0", port)
-      -- local id = socket.listen("127.0.0.1",port)
-      listen_id = id
-      skynet.error("Listen web port ", port)
-      socket.start(id , function(fd, addr)
-            root.on_socket( fd, addr)
-      end)
-  end)
 end
-
-
-
-function root.exit()
-    socket.close(listen_id)
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -72,14 +26,11 @@ end
 --local skynet = require "skynet"
 local urllib = require "http.url"
 local httpd = require "http.httpd"
-local websocket = require "websocket"
-local socket = require "skynet.socket"
 local sockethelper = require "http.sockethelper"
 function root.on_socket( fd, addr)
-    SOCKET_NUMBER = SOCKET_NUMBER + 1
-    socket.start(fd)
-    
+   
     -- limit request body size to 8192 (you can pass nil to unlimit)
+    -- 一般的业务不需要处理大量上行数据，为了防止攻击，做了一个 8K 限制。这个限制可以去掉。
     local code, url, method, header, body = httpd.read_request(sockethelper.readfunc(fd), tonumber(m_body_size_limit))
     if code then
         if code ~= 200 then
@@ -109,8 +60,7 @@ function root.on_socket( fd, addr)
     end
     
     
-    socket.close(fd)
-    SOCKET_NUMBER = SOCKET_NUMBER - 1
+    
 end
 
 
@@ -130,7 +80,7 @@ function root.on_message(addr, url, method, headers, path, query, body, fd)
     local ip, _ = addr:match("([^:]+):?(%d*)$")
     local req = {ip = ip, url = url, method = method, headers = headers, 
             path = path, query = query, body = body, fd = fd, addr = addr}
-    local res = {code = 200, body = body, headers = headers,json =""}
+    local res = {code = 200, body = body, headers = headers,json =nil}
 
 
     local trace_err = ""
@@ -152,19 +102,16 @@ function root.on_message(addr, url, method, headers, path, query, body, fd)
    
     
     --转发消息 
-    local gameconstants = require "app.config.gameconstants";
     if tonumber(m_handle_type) == gameconstants.HANDLE_TYPE_HTTTP then 
-       local network =  require "app.server.network";
        res.json = network.command_http_handler(path,req,req,res)
         --skynet.call(m_srv_net_work, "lua", "command_http_handler",path,req, res, skynet.self())
         
     elseif tonumber(m_handle_type) == gameconstants.HANDLE_TYPE_WEBSOCKET then
     
         if path == gameconstants.NetHttp_ACTION_WS then --http 连接 
-              local netwebsocket = require "app.server.netwebsocket"
+              local netwebsocket = require "app.servicehelper.netwebsocket"
               netwebsocket.start(m_srv_net_work,req, res);
          else
-              local network =  require "app.server.network";
               network.command_http_handler(path,req,req,res)
               --skynet.call(m_srv_net_work, "lua", "command_http_handler",path,req, res, skynet.self())
         end
@@ -176,6 +123,5 @@ end
 
 
 
-root.start(m_port,  m_body_size_limit,m_handle_type)
 
 return root

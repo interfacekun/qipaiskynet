@@ -1,7 +1,6 @@
 local skynet = require "skynet"
 
 
-require "lualib.init"
 --local wsapp = require "frontend.server.wsapp"
 
 local app ={}
