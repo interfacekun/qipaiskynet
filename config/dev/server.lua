@@ -10,7 +10,7 @@ local root = {
             ip = "192.168.103.91",
             type = "http",
             ws = "ws://192.168.103.91:8203/ws",
-            socket = 8203,
+            socket = 8303,
             port = 8203,
         },
     }

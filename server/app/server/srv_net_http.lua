@@ -34,7 +34,8 @@ function root.start(port, body_size_limit)
    m_body_size_limit = body_size_limit
   
   skynet.start(function()
-      local id = socket.listen("0.0.0.0", port)
+--      local id = socket.listen("0.0.0.0", port)
+      local id = socket.listen("127.0.0.1",port)
       listen_id = id
       skynet.error("Listen web port ", port)
       socket.start(id , function(fd, addr)
