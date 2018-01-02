@@ -4,7 +4,7 @@ local skynet = require "skynet"
 --local sockethelper = require "http.sockethelper"
 --local urllib = require "http.url"
 local gameconstants = require "app.config.gameconstants";
-local network =  require "app.server.network";
+local network =  require "app.servicehelper.network";
     
 
 local  m_body_size_limit , m_handle_type,m_srv_net_work ; 
