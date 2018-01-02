@@ -6,7 +6,7 @@ gameroot = "./server/app/"
 thread = 8 
 
 --harbor 可以是 1-255 间的任意整数。一个 skynet 网络最多支持 255 个节点。每个节点有必须有一个唯一的编号。
-harbor = 1
+harbor = 0
 
  -- main script 这是 bootstrap 最后一个环节将启动的 lua 服务，也就是你定制的 skynet 节点的主程序。默认为 main ，即启动 main.lua 这个脚本。这个 lua 服务的路径由下面的 luaservice 指定。
 start = "main" 
