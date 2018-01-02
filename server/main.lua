@@ -5,6 +5,7 @@ require "skynet.manager"
 --local rpc_mysql = require "rpc_mysql"
 --local rpc_redis = require "rpc_redis"
 local cluster = require "skynet.cluster"
+local gameconstants = require "app.config.gameconstants";
 app =  require "app.app"
 
 
@@ -45,7 +46,7 @@ skynet.start(function ()
     cluster.register("srv_net_work", srv_net_work)
     
    
-    local srv_net_http = skynet.newservice("srv_net_http", port,  65536,type)
+    local srv_net_http = skynet.newservice("srv_net_http", port,  65536,gameconstants.HANDLE_TYPE_WEBSOCKET)
     cluster.register("srv_net_http", srv_net_http)
     
     
