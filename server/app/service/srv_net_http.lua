@@ -50,7 +50,7 @@ function root.start(port, body_size_limit,mode,handle_type)
           local agent = {}
           for i= 1, 20 do
             -- 启动 20 个代理服务用于处理 http 请求
-            agent[i] = skynet.newservice("srv_net_http_agent")
+            agent[i] = skynet.newservice("srv_net_http_agent",i)
             --agent[i] = skynet.newservice(SERVICE_NAME, "agent")  
           end
           

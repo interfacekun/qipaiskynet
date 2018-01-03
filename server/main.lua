@@ -40,7 +40,9 @@ skynet.start(function ()
 --    skynet.name(".room", handle)  
 
 
-
+     --启动mysql 服务 
+     local srv_mysql = skynet.newservice("srv_mysql")
+      cluster.register("srv_mysql", srv_mysql)
 
     --启动net的中转命令服务
     local srv_net_work = skynet.newservice("srv_net_work")
