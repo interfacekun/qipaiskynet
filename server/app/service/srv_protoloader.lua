@@ -11,7 +11,7 @@ local m_proto_name = ...
 
 --初始化 
 local init_proto = function(m_proto_name)
-  local filename = string.format("proto.game_%s.sproto", m_proto_name)
+  local filename = string.format("proto.game_%s.proto", m_proto_name)
   --local filename = string.format("proto.game_%s.sproto", gameid)
   local proto = require (filename);
   
@@ -24,7 +24,7 @@ end
 
 
 skynet.start(function()
-  init_proto();
+  init_proto(m_proto_name);
   -- don't call skynet.exit() , because sproto.core may unload and the global slot become invalid
 end)
 

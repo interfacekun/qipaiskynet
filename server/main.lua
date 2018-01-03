@@ -36,7 +36,7 @@ skynet.start(function ()
 
 
 
-    skynet.uniqueservice("srv_protoloader")
+    skynet.uniqueservice("srv_protoloader",100)
 
     -- 启动房间管理服务
 --    local handle = hotfix.start_hotfix_service("skynet", "gate/service/srv_room_sup")

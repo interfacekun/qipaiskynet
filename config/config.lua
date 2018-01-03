@@ -37,6 +37,7 @@ lua_path = skynetroot .. "lualib/?.lua;" ..
 --            cloudroot .. "lualib/rpc/?.lua;".. 
 --            "./test/?.lua;" ..
             "./lualib/?.lua;" ..
+            -- "./proto/?.lua;" ..
             "./?.lua" 
             
 --将添加到 package.cpath 中的路径，供 require 调用。            
