@@ -15,10 +15,13 @@ local root = {}
 local CMD = {}
 
 -- 监听http 
-function CMD.command_http_handler(cmd, action,req,res)
+function CMD.command_http_handler(path,req,res)
   local ret = nil
+  local body =req.body;
+  local cmd = body.cmd
+
   print("command_http_handler : ",action);
-  if action == gameconstants.NetHttp_ACTION_WS then --http 连接 
+  if cmd == gameconstants.NetHttp_ACTION_WS then --http 连接 
         
   end
   return ret 

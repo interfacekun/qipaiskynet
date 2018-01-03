@@ -3,6 +3,7 @@ local skynet = require "skynet"
 require "print_r"
 require "utils.utils"
 require "class"
+require "utils.function"
 
 local logpath = skynet.getenv("logpath")
 local logmode = skynet.getenv("logmode")

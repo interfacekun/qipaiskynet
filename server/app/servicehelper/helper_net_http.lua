@@ -97,13 +97,13 @@ function root.on_message(addr, url, method, headers, path, query, body, fd)
     local url =req.url
     local path = req.path;
     print(" helper_net_http.lua => method:"..method,",path:"..path,",addr:"..addr,",fd:"..fd,",ip:"..ip,",url:"..url);
-    
+    print("请求的数据：",req,res);
     
    
     
     --转发消息 
     if tonumber(m_handle_type) == gameconstants.HANDLE_TYPE_HTTTP then 
-       res.json = network.command_http_handler(path,req,req,res)
+       res.json = network.command_http_handler(path,req,res)
         --skynet.call(m_srv_net_work, "lua", "command_http_handler",path,req, res, skynet.self())
         
     elseif tonumber(m_handle_type) == gameconstants.HANDLE_TYPE_WEBSOCKET then
@@ -112,7 +112,7 @@ function root.on_message(addr, url, method, headers, path, query, body, fd)
               local netwebsocket = require "app.servicehelper.netwebsocket"
               netwebsocket.start(m_srv_net_work,req, res);
          else
-              network.command_http_handler(path,req,req,res)
+              network.command_http_handler(path,req,res)
               --skynet.call(m_srv_net_work, "lua", "command_http_handler",path,req, res, skynet.self())
         end
             

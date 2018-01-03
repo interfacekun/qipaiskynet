@@ -117,9 +117,9 @@ function root.on_message(ws, msg)
     end
     
     
-      local data = {a ="sss",cmd = "login"};
-      local cf = cjson_encode(data)
-      root.send(fd,cf);
+      -- local data = {a ="sss",cmd = "login"};
+      -- local cf = cjson_encode(data)
+      -- root.send(fd,cf);
       
       
       local network =  require "app.servicehelper.network";
