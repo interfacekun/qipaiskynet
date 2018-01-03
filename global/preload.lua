@@ -1,5 +1,5 @@
 local skynet = require "skynet"
-require "luaext"
+-- require "luaext"
 require "print_r"
 require "utils.utils"
 require "class"
