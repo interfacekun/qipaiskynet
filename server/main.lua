@@ -27,7 +27,8 @@ skynet.start(function ()
 
     -- 获取配置环境
     local env = skynet.getenv("env")
-    local config = require('config.' .. env .. ".server")
+    local config_server = require('config.' .. env .. ".config_server")
+    local config_mysql = require('config.' .. env .. ".config_mysql")
 --    local backend_port = config.etcdcf.backend.port
     -- print(config.etcd);
     -- skynet.setenv("gate_etcd", config.etcd)
@@ -42,7 +43,9 @@ skynet.start(function ()
 
      --启动mysql 服务 
      local srv_mysql = skynet.newservice("srv_mysql")
-      cluster.register("srv_mysql", srv_mysql)
+     cluster.register("srv_mysql", srv_mysql)
+     skynet.call(".mysql", "lua", "init", "login", config_mysql["login"]) 
+
 
     --启动net的中转命令服务
     local srv_net_work = skynet.newservice("srv_net_work")
@@ -50,16 +53,16 @@ skynet.start(function ()
     
     
     --启动负载均衡的登录服务
-    local port_login = config.niuniu.server.port_login
-    local body_size_limit_login = config.niuniu.server.body_size_limit_login
+    local port_login = config_server.niuniu.server.port_login
+    local body_size_limit_login = config_server.niuniu.server.body_size_limit_login
     local srv_net_http_login = skynet.newservice("srv_net_http", port_login,  body_size_limit_login,"agent",gameconstants.HANDLE_TYPE_HTTTP,nil)
     cluster.register("srv_net_http_login", srv_net_http_login)
     
     
     
     --启动websocket服务
-    local port_websocket = config.niuniu.server.port_websocket    
-    local body_size_limit_websocket = config.niuniu.server.body_size_limit_websocket
+    local port_websocket = config_server.niuniu.server.port_websocket    
+    local body_size_limit_websocket = config_server.niuniu.server.body_size_limit_websocket
     local srv_net_http_websocket = skynet.newservice("srv_net_http", port_websocket,  body_size_limit_websocket,nil,gameconstants.HANDLE_TYPE_WEBSOCKET,nil)
     cluster.register("srv_net_http_websocket", srv_net_http_websocket)
     
