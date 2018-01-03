@@ -36,6 +36,8 @@ skynet.start(function ()
 
 
 
+    skynet.uniqueservice("srv_protoloader")
+
     -- 启动房间管理服务
 --    local handle = hotfix.start_hotfix_service("skynet", "gate/service/srv_room_sup")
 --    skynet.name(".room", handle)  
@@ -65,6 +67,16 @@ skynet.start(function ()
     local body_size_limit_websocket = config_server.niuniu.server.body_size_limit_websocket
     local srv_net_http_websocket = skynet.newservice("srv_net_http", port_websocket,  body_size_limit_websocket,nil,gameconstants.HANDLE_TYPE_WEBSOCKET,nil)
     cluster.register("srv_net_http_websocket", srv_net_http_websocket)
+    
+    
+    
+    --启动gate socket 服务 
+    local srv_net_gate = skynet.newservice("srv_net_gate")
+    cluster.register("srv_net_gate", srv_net_gate)
+    --调用start方法 
+    local gateserver = config_server.niuniu.gateserver    
+    skynet.call(srv_net_gate, "lua", "start",gateserver )
+    
     
     
     

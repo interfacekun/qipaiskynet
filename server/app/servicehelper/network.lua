@@ -7,12 +7,21 @@
 local skynet = require "skynet"
 local gameconstants = require "app.config.gameconstants";
 
-local root = {}
-
-
+local game_command = nil;
 
  ----- 命令处理类 
 local CMD = {}
+
+
+
+--初始化  
+function CMD.init(gameid)
+  local filename = string.format("proto.game_%s.game-command", gameid)
+  game_command = require (filename);
+end
+
+
+
 
 -- 监听http 
 function CMD.command_http_handler(path,req,res)
@@ -20,10 +29,14 @@ function CMD.command_http_handler(path,req,res)
   local body =req.body;
   local cmd = body.cmd
 
-  print("command_http_handler : ",action);
-  if cmd == gameconstants.NetHttp_ACTION_WS then --http 连接 
+  print("command_http_handler : ",cmd);
+  if cmd == game_command.user_login then -- 登录 
+      
+            
         
   end
+  
+  
   return ret 
 end
 
@@ -55,4 +68,4 @@ end
 
 
 
-return root;
+return CMD;

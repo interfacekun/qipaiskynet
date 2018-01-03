@@ -18,6 +18,8 @@ function CMD.on_socket( fd, addr)
     print("srv_net_http_agent.lua = > start (".. fd.."),SOCKET_NUMBER:"..SOCKET_NUMBER,",m_number:"..m_number)
 
     SOCKET_NUMBER = SOCKET_NUMBER + 1
+    -- 每当 accept 函数获得一个新的 socket id 后，并不会立即收到这个 socket 上的数据。这是因为，我们有时会希望把这个 socket 的操作权转让给别的服务去处理。
+    -- 任何一个服务只有在调用 socket.start(id) 之后，才可以收到这个 socket 上的数据。
     socket.start(fd)
     
   
