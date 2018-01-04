@@ -7,7 +7,7 @@ local gameconstants = require "app.config.gameconstants";
 local network =  require "app.servicehelper.network";
     
 
-local  m_body_size_limit , m_handle_type,m_srv_net_work ; 
+local  m_body_size_limit , m_handle_type,m_srv ; 
 
 
 
@@ -15,9 +15,10 @@ local root = {}
 
 
 --吧基础的数据丢进来 
-function root.init( body_size_limit,handle_type)
+function root.init( body_size_limit,handle_type,m_srv)
    m_body_size_limit = body_size_limit
    m_handle_type = handle_type;
+   m_srv = m_srv
 end
 
 
@@ -109,10 +110,11 @@ function root.on_message(addr, url, method, headers, path, query, body, fd)
     elseif tonumber(m_handle_type) == gameconstants.HANDLE_TYPE_WEBSOCKET then
     
         if path == gameconstants.NetHttp_ACTION_WS then --http 连接 
-              local netwebsocket = require "app.servicehelper.netwebsocket"
-              netwebsocket.start(m_srv_net_work,req, res);
+--              local netwebsocket = require "app.servicehelper.netwebsocket"
+--              netwebsocket.start(m_srv_net_work,req, res);
+                skynet.call(m_srv, "lua", "start",req, res)
          else
-              network.command_http_handler(path,req,res)
+              --network.command_http_handler(path,req,res)
               --skynet.call(m_srv_net_work, "lua", "command_http_handler",path,req, res, skynet.self())
         end
             
