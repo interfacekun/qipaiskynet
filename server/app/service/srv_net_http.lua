@@ -20,7 +20,7 @@ NetHttp.lua
       
       on_message
 --]]
-local m_port,  m_body_size_limit ,m_mode, m_srv_net_work = ...  --   端口   最大连接数  负载均衡处理类型       收到消息的中转处理 
+local m_port,  m_body_size_limit , m_srv_net_work = ...  --   端口   最大连接数      收到消息的中转处理 
 
 
 local root = {}
@@ -38,7 +38,6 @@ local SOCKET_NUMBER = 0 --socket连接数目
 function root.start(port, body_size_limit,mode)
     m_port = port
    m_body_size_limit = body_size_limit
-   m_mode = mode
    helper_net_http.init( body_size_limit,gameconstants.HANDLE_TYPE_HTTTP);
    
   
@@ -118,6 +117,6 @@ function root.on_socket( fd, addr)
 end
 
 
-root.start(m_port,  m_body_size_limit,m_mode)
+root.start(m_port,  m_body_size_limit)
 
 return root
