@@ -49,15 +49,11 @@ skynet.start(function ()
      skynet.call(".mysql", "lua", "init", "login", config_mysql["login"]) 
 
 
-    --启动net的中转命令服务
-    local srv_net_work = skynet.newservice("srv_net_work")
-    cluster.register("srv_net_work", srv_net_work)
-    
     
     --启动负载均衡的登录服务
     local port_login = config_server.game_100.server.port_login
     local body_size_limit_login = config_server.game_100.server.body_size_limit_login
-    local srv_net_http_login = skynet.newservice("srv_net_http", port_login,  body_size_limit_login,"agent",gameconstants.HANDLE_TYPE_HTTTP,nil)
+    local srv_net_http_login = skynet.newservice("srv_net_http", port_login,  body_size_limit_login,"agent")
     cluster.register("srv_net_http_login", srv_net_http_login)
     
     
@@ -65,7 +61,7 @@ skynet.start(function ()
     --启动websocket服务
     local port_websocket = config_server.game_100.server.port_websocket    
     local body_size_limit_websocket = config_server.game_100.server.body_size_limit_websocket
-    local srv_net_http_websocket = skynet.newservice("srv_net_http", port_websocket,  body_size_limit_websocket,nil,gameconstants.HANDLE_TYPE_WEBSOCKET,nil)
+    local srv_net_http_websocket = skynet.newservice("srv_net_websocket", port_websocket,  body_size_limit_websocket)
     cluster.register("srv_net_http_websocket", srv_net_http_websocket)
     
     
