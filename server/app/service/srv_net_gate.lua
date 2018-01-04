@@ -1,6 +1,8 @@
 --[[
 srv_net_gate.lua 
 
+WATCHDOG
+
  服务器socket 网关  
 
 ]]
@@ -9,8 +11,8 @@ local skynet = require "skynet"
 
 
 
-local gate --网关 
-local agent = {} --用户句柄 
+local gate --网关  只有一个 
+local agent = {} --用户句柄 数组
 
 
 
@@ -31,9 +33,11 @@ end
 
 
 local SOCKET = {}
+--下述代码，在gate在收到接入事件时被传递触发
+-- 看门狗建立了agent并通过start指令将所有信息转交给它
 function SOCKET.open(fd, addr)
   skynet.error("New client from : " .. addr)
-  agent[fd] = skynet.newservice("agent")
+  agent[fd] = skynet.newservice("srv_net_gate_agent")
   skynet.call(agent[fd], "lua", "start", { gate = gate, client = fd, watchdog = skynet.self() })
 end
 
@@ -52,7 +56,9 @@ function SOCKET.warning(fd, size)
   print("socket warning", fd, size)
 end
 
+--监听消息 
 function SOCKET.data(fd, msg)
+  
 end
 
 

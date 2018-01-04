@@ -55,16 +55,16 @@ skynet.start(function ()
     
     
     --启动负载均衡的登录服务
-    local port_login = config_server.niuniu.server.port_login
-    local body_size_limit_login = config_server.niuniu.server.body_size_limit_login
+    local port_login = config_server.game_100.server.port_login
+    local body_size_limit_login = config_server.game_100.server.body_size_limit_login
     local srv_net_http_login = skynet.newservice("srv_net_http", port_login,  body_size_limit_login,"agent",gameconstants.HANDLE_TYPE_HTTTP,nil)
     cluster.register("srv_net_http_login", srv_net_http_login)
     
     
     
     --启动websocket服务
-    local port_websocket = config_server.niuniu.server.port_websocket    
-    local body_size_limit_websocket = config_server.niuniu.server.body_size_limit_websocket
+    local port_websocket = config_server.game_100.server.port_websocket    
+    local body_size_limit_websocket = config_server.game_100.server.body_size_limit_websocket
     local srv_net_http_websocket = skynet.newservice("srv_net_http", port_websocket,  body_size_limit_websocket,nil,gameconstants.HANDLE_TYPE_WEBSOCKET,nil)
     cluster.register("srv_net_http_websocket", srv_net_http_websocket)
     
@@ -74,7 +74,7 @@ skynet.start(function ()
     local srv_net_gate = skynet.newservice("srv_net_gate")
     cluster.register("srv_net_gate", srv_net_gate)
     --调用start方法 
-    local gateserver = config_server.niuniu.gateserver    
+    local gateserver = config_server.game_100.gateserver    
     skynet.call(srv_net_gate, "lua", "start",gateserver )
     
     

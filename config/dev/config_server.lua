@@ -4,7 +4,7 @@
 
 local root = {
    -- etcdfile = etcdfile,
-    niuniu = {
+    game_100 = {
        -- name = etcdfile,
         server = {
             ip_login = "192.168.103.91",

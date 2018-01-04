@@ -4,7 +4,7 @@ local socket = require "skynet.socket"
 local sproto = require "sproto"
 local sprotoloader = require "sprotoloader"
 
-local WATCHDOG
+local WATCHDOG;
 
 
 
