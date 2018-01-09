@@ -2,12 +2,10 @@
 qipai   with  skynet
 
 
+<br>
+<br>
+<br>
 
-
-<br>
-<br>
-<br>
-<br>
 
 - blog 
 
@@ -15,8 +13,6 @@ qipai   with  skynet
   2. skynet学习资源：http://skynetclub.github.io/skynet/resource.html
 
 
-<br>
-<br>
 <br>
 <br>
 
@@ -33,8 +29,6 @@ qipai   with  skynet
 
 <br>
 <br>
-<br>
-<br>
 
 
 - 3rd Third party library 
@@ -46,8 +40,6 @@ qipai   with  skynet
 
 
 
-<br>
-<br>
 <br>
 <br>
 
