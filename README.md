@@ -13,9 +13,9 @@ qipai   with  skynet
     git submodule update    
     
     
-    > > submodule远程分支发生变更后，直接使用git submodule update是不会进行更新操作的  
-    > > git submodule foreach git checkout master  
-    > > git submodule foreach git pull  
+    > submodule远程分支发生变更后，直接使用git submodule update是不会进行更新操作的  
+    > git submodule foreach git checkout master  
+    > git submodule foreach git pull  
 
 
 
@@ -25,6 +25,6 @@ qipai   with  skynet
   1. cloud 下  
      make   macosx   
 
-  2.   
-     killall skynet  
+  2.  
+       killall skynet  
 
