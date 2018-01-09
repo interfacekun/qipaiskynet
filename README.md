@@ -4,6 +4,8 @@ qipai   with  skynet
 
 
 
+
+
 - git 
 
   1. submodule  
@@ -16,6 +18,8 @@ qipai   with  skynet
     > submodule远程分支发生变更后，直接使用git submodule update是不会进行更新操作的  
     > git submodule foreach git checkout master  
     > git submodule foreach git pull  
+
+
 
 
 
