@@ -24,6 +24,6 @@ qipai   with  skynet
   1. cloud 下  
      make   macosx   
 
-  2. 
+  2.   
      killall skynet  
 
