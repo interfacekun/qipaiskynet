@@ -3,7 +3,10 @@ qipai   with  skynet
 
 
 
-
+<br>
+<br>
+<br>
+<br>
 
 
 - git 
@@ -20,15 +23,13 @@ qipai   with  skynet
     > git submodule foreach git pull  
 
 
-
-
-
-
+<br>
+<br>
 
 - skynet
   1. cloud 下  
      make   macosx   
 
-  2.  
+  2.  <br>
        killall skynet  
 
