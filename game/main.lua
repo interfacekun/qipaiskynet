@@ -35,8 +35,9 @@ skynet.start(function ()
     app.new();
 
 
-
-    skynet.uniqueservice("srv_protoloader",100)
+    --根据不同游戏加载不同的proto
+    local gmaeid = 100
+    skynet.uniqueservice("srv_protoloader",gmaeid) 
 
     -- 启动房间管理服务
 --    local handle = hotfix.start_hotfix_service("skynet", "gate/service/srv_room_sup")

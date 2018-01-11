@@ -25,11 +25,8 @@ qipai   with  skynet
   6.  all suport agent,  load balancing
   5.  ...
 
-
-
 <br>
 <br>
-
 
 - 3rd Third party library 
 
@@ -38,11 +35,8 @@ qipai   with  skynet
   3. lfs
   4. websocket
 
-
-
 <br>
 <br>
-
 
 - git 
 
@@ -56,13 +50,12 @@ qipai   with  skynet
     > git submodule foreach git checkout master  
     > git submodule foreach git pull  
 
-
 <br>
 <br>
 
 - skynet
   1. cloud 下  
-       Linux: make linux
+       Linux: make linux  
        Mac: make macosx 
 
   2.  <br>

@@ -1,5 +1,6 @@
 local skynet = require "skynet"
 require "skynet.manager"
+local logger = log4.get_logger(SERVICE_NAME)
 
 --所有的mysql 连接池 
 local MYSQL_DB_POOL = {}
@@ -51,7 +52,7 @@ end
 function CMD.acquire(name)
     local config = MYSQL_CONFIG[name]
     if not config then
-        --logger.warn("not %s config mysql ", name)
+        logger.warn("not %s config mysql ", name)
         return 
     end
 
@@ -64,7 +65,7 @@ function CMD.acquire(name)
         end 
     end
     if #db_pool == 0 then
-        --logger.error("sup response.acquire db_pool is emtpy")
+        logger.error("sup response.acquire db_pool is emtpy")
     end
 
     return db_pool
@@ -76,9 +77,9 @@ end
 
 
 function CMD.init(name, cf)
-    --logger.info("init %s", name)
+    logger.info("init %s", name)
     if MYSQL_DB_POOL[name] then
-        --logger.warn("%s cf mysql already init", name)
+        logger.warn("%s cf mysql already init", name)
         return
     end
     init_mysql_pool(name, cf)

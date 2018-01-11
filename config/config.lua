@@ -1,6 +1,6 @@
 cloudroot="./cloud/"
 skynetroot = cloudroot .. "skynet/"
-gameroot = "./server/app/"
+gameroot = "./game/"
 
 --thread 启动多少个工作线程。通常不要将它配置超过你实际拥有的 CPU 核心数。
 thread = 8 
@@ -33,7 +33,7 @@ cpath = skynetroot.."cservice/?.so;".. "" ..cloudroot.."cservice/?.so"
 lua_path = skynetroot .. "lualib/?.lua;" ..
             -- skynetroot .. "lualib/compat10/?.lua;" ..
             cloudroot .. "lualib/?.lua;"..
-            "./server/?.lua;" ..
+            gameroot.."?.lua;" ..
 --            cloudroot .. "lualib/rpc/?.lua;".. 
 --            "./test/?.lua;" ..
             "./lualib/?.lua;" ..
@@ -48,10 +48,10 @@ lua_cpath = skynetroot .. "luaclib/?.so;" .. cloudroot .."luaclib/?.so"
 
 
 
-gameservice ="./server/?.lua;".. --"./service/?.lua;" ..
+gameservice =gameroot.."app/service/?.lua;" --"./server/?.lua;".. --"./service/?.lua;" ..
 --            cloudroot.."service/?.lua;" ..
 --            "./test/?.lua;" --.. 
-            gameroot.."service/?.lua;"
+            
 luaservice = skynetroot.."service/?.lua;" .. gameservice
 
 --用 snax 框架编写的服务的查找路径。
@@ -63,7 +63,7 @@ snax = gameservice
 --logmode = $DEBUG_MODE
 --nodename = $NODENAME
 --etcdhost = $ETCDHOST
-logpath='./logs/test/'
+logpath='./logs/test/' --日志
 env = "dev" --开发版本 
 
 

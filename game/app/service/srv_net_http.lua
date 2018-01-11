@@ -6,7 +6,7 @@ local socket = require "skynet.socket"
 local gameconstants = require "app.config.gameconstants";
 local network =  require "app.servicehelper.network";
 local helper_net_http = require "app.servicehelper.helper_net_http"
-
+local logger = log4.get_logger(SERVICE_NAME)
 
 --[[
 NetHttp.lua
@@ -57,6 +57,7 @@ function root.start(port, body_size_limit,mode)
           local id = socket.listen("0.0.0.0", port)  
           socket.start(id , function(id, addr)  
                 -- 当一个 http 请求到达的时候, 把 socket id 分发到事先准备好的代理中去处理。
+                logger.debug(string.format("%s connected, pass it to agent :%08x", addr, agent[balance]))
                 skynet.error(string.format("%s connected, pass it to agent :%08x", addr, agent[balance]))
                 skynet.send(agent[balance], "lua", "on_socket", id, addr)
                 balance = balance + 1

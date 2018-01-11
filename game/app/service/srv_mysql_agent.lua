@@ -2,7 +2,7 @@ local skynet = require "skynet"
 local mysql = require "skynet.db.mysql"
 
 local MYSQL_CONFIG, CONNECT_NUM = ...  --配置文件  最大连接数 
---local logger = log4.get_logger(SERVICE_NAME)
+local logger = log4.get_logger(SERVICE_NAME)
 
 local DB_POOL = {}
 local MYSQL_CONNECT_NUM = 0
@@ -32,7 +32,7 @@ local function init_mysql(config, num)
     skynet.fork(function ( ... )
         while true do 
             skynet.sleep(5 * 60 * 100)
-            --logger.debug("mysql 5 min query %d create %d close %d", QUERY_NUMBER, OPEN_CONNECT, CLOSE_CONNECT)
+            logger.debug("mysql 5 min query %d create %d close %d", QUERY_NUMBER, OPEN_CONNECT, CLOSE_CONNECT)
             QUERY_NUMBER = 0
         end
     end)
@@ -44,10 +44,10 @@ local function disconnect(db)
     
     local ok, rs = pcall(db.disconnect, db)
     if not ok then
-        --logger.error("disconnect error %s", rs)
+        logger.error("disconnect error %s", rs)
     else
         CLOSE_CONNECT = CLOSE_CONNECT + 1
-        --logger.debug("disconnect success")
+        logger.debug("disconnect success")
     end
 end
 
@@ -64,11 +64,11 @@ end
 
 local function acquire()
     if #DB_POOL < 1 then
-        --logger.warn("mysql maybe busy MYSQL_CONNECT_NUM %d !!!", MYSQL_CONNECT_NUM)
+        logger.warn("mysql maybe busy MYSQL_CONNECT_NUM %d !!!", MYSQL_CONNECT_NUM)
         local ok, db = pcall(mysql.connect, MYSQL_CONFIG)
         OPEN_CONNECT = OPEN_CONNECT + 1
         if not ok then
-            --logger.error("mysql connect error %s", db or "null")
+            logger.error("mysql connect error %s", db or "null")
             return
         end
         db:query("set names utf8")
@@ -86,13 +86,13 @@ local function try_query(...)
     local sql = ...
     local timeout = 200
     local timer = create_timeout(timeout, function ()
-            --logger.warn("mysql try query timeout %d sql %s", timeout, sql or "")
+            logger.warn("mysql try query timeout %d sql %s", timeout, sql or "")
         end)
     local ok, rs = pcall(db.query, db, ...)
     timer.delete()
     if not ok then
         disconnect(db)
-        --logger.error("try query sql %s error %s", sql, rs or "null")
+        logger.error("try query sql %s error %s", sql, rs or "null")
         return false
     end
     release(db)
@@ -110,7 +110,7 @@ local function query(...)
     end
     local timeout = 200
     local timer = create_timeout(timeout, function ()
-            --logger.warn("mysql query timeout %d sql %s", timeout, sql or "")
+            logger.warn("mysql query timeout %d sql %s", timeout, sql or "")
         end)
     
     local ok , rs = pcall(db.query, db, ...)
@@ -118,7 +118,7 @@ local function query(...)
     
     if not ok then
         disconnect(db)
-        --logger.error("query sql %s error %s", sql, rs or "null")
+        logger.error("query sql %s error %s", sql, rs or "null")
         return try_query(...)
     end
     release(db)
