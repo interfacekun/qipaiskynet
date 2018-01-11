@@ -11,11 +11,11 @@ app =  require "app.app"
 
 
 skynet.start(function ()
---    skynet.uniqueservice("srv_logger_sup")
---    skynet.newservice("debug_console", 8903)
---    if not skynet.getenv "daemon" then
---        local console = skynet.uniqueservice("console")
---    end
+    skynet.uniqueservice("srv_logger")
+    skynet.newservice("debug_console", 8903)
+    if not skynet.getenv "daemon" then
+        local console = skynet.uniqueservice("console")
+    end
 
 --    -- 启动登陆管理服务
 --    local handle = skynet.uniqueservice("gate/service/srv_logon")
