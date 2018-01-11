@@ -6,19 +6,10 @@
 ]]
 local skynet = require "skynet"
 local gameconstants = require "app.config.gameconstants";
-
-local game_command = nil;
+local all_game_command = require "proto.all_game_command";
 
  ----- 命令处理类 
 local CMD = {}
-
-
-
---初始化  
-function CMD.init(gameid)
-  local filename = string.format("proto.game_%s.game-command", gameid)
-  game_command = require (filename);
-end
 
 
 
@@ -30,7 +21,7 @@ function CMD.command_http_handler(path,req,res)
   local cmd = body.cmd
 
   print("command_http_handler : ",cmd);
-  if cmd == game_command.user_login then -- 登录 
+  if cmd == all_game_command.common_user_login then -- 登录 
       
             
         

@@ -11,7 +11,10 @@ local m_proto_name = ...
 
 --初始化 
 local init_proto = function(m_proto_name)
-  local filename = string.format("proto.game_%s.proto", m_proto_name)
+  local filename = string.format("proto.all-proto")
+  if m_proto_name then 
+    filename = string.format("proto.game_%s.proto", m_proto_name)
+  end
   --local filename = string.format("proto.game_%s.sproto", gameid)
   local proto = require (filename);
   

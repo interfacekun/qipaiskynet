@@ -26,7 +26,7 @@
     }
 };
 
-
+ 
 
 
  // 请求数据结构
@@ -339,8 +339,8 @@ local exports={}
 
 
  exports.CMD = {
-        user_register="user_register",--//注册
-        user_login="user_login", --// 登录
+        common_user_register="common_user_register",--//注册
+        common_user_login="common_user_login", --// 登录
 --        loginThird="user_auth", --// 第三方登录
 --        logout="user_logout", --// 登出退出游戏
 
