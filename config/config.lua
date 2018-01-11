@@ -60,12 +60,12 @@ snax = gameservice
 
 
 
---logpath = $LOG_PATH
---logmode = $DEBUG_MODE
+logpath = $LOG_PATH --日志写的文件 必须先建立一个这样的文件 
+logmode = $DEBUG_MODE  --是否调试模式 
 --nodename = $NODENAME
 --etcdhost = $ETCDHOST
-logpath='./logs/test/' --日志
-env = "dev" --开发版本 
+env = $ENV or "dev" --开发版本 
+
 
 
 

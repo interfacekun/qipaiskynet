@@ -54,5 +54,11 @@ done
 
 
 
+#这里的-d 参数判断$LOG_PATH是否存在 
+if [ ! -d "$LOG_PATH"]; then
+mkdir $LOG_PATH
+fi
+
+
 $SKYNET_ROOT $ROOT/config/config.lua
 
