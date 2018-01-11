@@ -48,8 +48,9 @@ lua_cpath = skynetroot .. "luaclib/?.so;" .. cloudroot .."luaclib/?.so"
 
 
 
-gameservice =gameroot.."app/service/?.lua;" --"./server/?.lua;".. --"./service/?.lua;" ..
---            cloudroot.."service/?.lua;" ..
+gameservice =gameroot.."app/service/?.lua;"..--"./server/?.lua;".. --"./service/?.lua;" ..
+           -- cloudroot.."service/?.lua;" ..
+           gameroot.."?.lua;"
 --            "./test/?.lua;" --.. 
             
 luaservice = skynetroot.."service/?.lua;" .. gameservice
