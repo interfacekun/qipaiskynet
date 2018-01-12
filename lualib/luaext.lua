@@ -202,6 +202,44 @@ string.trim = function(s, c)
     return string.rtrim(string.ltrim(s, c), c)
 end
 
+local function _formotGameNickName(inputstr,len)
+  if inputstr == nil or len == nil or len <= 0 then
+        return ""
+    end
+    local out=""
+    inputstr=tostring(inputstr)
+    local lenInByte = #inputstr
+    local width = 0
+    local i = 1
+    local x = 1
+    while (i<=lenInByte) do
+        local curByte = string.byte(inputstr, i)
+        local byteCount = 1
+        if curByte>0 and curByte<=127 then
+            byteCount = 1
+            width = width + 1
+        elseif curByte>=192 and curByte<223 then 
+      byteCount = 2
+      width = width + 2
+        elseif curByte>=224 and curByte<239 then
+            byteCount = 3
+            width = width + 2
+        elseif curByte>=240 and curByte<=247 then
+            byteCount = 4
+            width = width + 2
+        end
+        if len < width then
+        return out--..".."
+    end
+        local char = string.sub(inputstr, i, i+byteCount-1)
+        i = i + byteCount
+        out=out..char
+        x = x + 1
+    end
+    return out
+end
+
+
 _tostring = tostring
 local function dump(obj)
     local cache = {}

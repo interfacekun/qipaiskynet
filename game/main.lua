@@ -8,6 +8,8 @@ local cluster = require "skynet.cluster"
 local gameconstants = require "app.config.gameconstants";
 app =  require "app.app"
 
+local center = require "center"
+
 
 
 skynet.start(function ()
