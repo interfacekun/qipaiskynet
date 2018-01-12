@@ -55,7 +55,7 @@ done
 
 
 #这里的-d 参数判断$LOG_PATH是否存在   主要判断日志文件在不在
-log_path=${LOG_PATH:1:${#LOG_PATH}-2}
+log_path=${LOG_PATH:1:${#LOG_PATH}-2} 
 if [ ! -d $log_path ]; then
     echo  "mkdir ${log_path}"
     mkdir -p ${log_path}

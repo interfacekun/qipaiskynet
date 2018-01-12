@@ -18,8 +18,10 @@ local CMD = {}
 function CMD.command_http_handler(path,req,res)
   local ret = nil
   local body =req.body;
-  local cmd = body.cmd
+   local bodytable = html_utils.formatbody(body)
+  local cmd = bodytable.cmd
 
+  print(body);
   print("command_http_handler : ",cmd);
   if cmd == all_game_command.common_user_login then -- 登录 
       

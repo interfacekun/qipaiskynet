@@ -4,6 +4,7 @@ require "print_r"
 require "utils.utils"
 require "class"
 require "utils.function"
+html_utils = require "utils.html_utils"
 
 local logpath = skynet.getenv("logpath")
 local logmode = skynet.getenv("logmode")
