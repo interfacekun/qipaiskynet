@@ -128,16 +128,12 @@ end
       local cf = cjson_encode(data)
       root.send(fd,cf);
  --]]
---function CMD.send(fd, data)
---    local client = SOCKET_TO_CLIENT[fd]
---    if not client then
---        return
---    end
---    
---    print("发送的数据包：");
---    print(data);
---    local ws = client.session.ws
---    local ok, reason = ws:send_binary(data)
+function CMD.send(fd, data)
+   local a = m_agent[fd]
+    if a then
+        skynet.call(a, "lua", "send",fd,data)
+    end
+end
 --end
 --[[
   关闭 
@@ -177,7 +173,7 @@ skynet.start(function()
     listen_id = id
     skynet.error("Listen web port ", m_port)
     socket.start(id , function(fd, addr)
-         SOCKET_NUMBER = SOCKET_NUMBER + 1
+          SOCKET_NUMBER = SOCKET_NUMBER + 1
           socket.start(fd)
           
           helper_net_http.on_socket( fd, addr);

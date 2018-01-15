@@ -112,7 +112,9 @@ function root.on_message(addr, url, method, headers, path, query, body, fd)
         if path == gameconstants.NetHttp_ACTION_WS then --http 连接 
 --              local netwebsocket = require "app.servicehelper.netwebsocket"
 --              netwebsocket.start(m_srv_net_work,req, res);
-                skynet.call(m_srv, "lua", "start",req, res)
+                if m_srv then 
+                    skynet.call(m_srv, "lua", "start",req, res)
+                end
          else
               --network.command_http_handler(path,req,res)
               --skynet.call(m_srv_net_work, "lua", "command_http_handler",path,req, res, skynet.self())

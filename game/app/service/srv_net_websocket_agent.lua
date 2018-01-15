@@ -22,8 +22,8 @@ local function send_package(pack)
 	local package = string.pack(">s2", pack)
 	--socket.write(client_fd, package)
 	
-	 local ws = m_client.ws
-   local ok, reason = ws:send_binary(package)
+	local ws = m_client.ws
+    local ok, reason = ws:send_binary(package)
 end
 local function close(code, reason)
    local ws = m_client.ws

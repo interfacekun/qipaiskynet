@@ -15,12 +15,9 @@ local html_utils = {}
 @return 
 ]]
 html_utils.formatbody = function( body )
-
 	local ret = {}
 
-
     local all =  string.split(body, "&")
-
     for k, v in pairs(all) do
         local one = string.split(v, "=")
         ret[one[1]] = one[2]
