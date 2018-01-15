@@ -40,9 +40,10 @@ skynet.start(function ()
 
 
      --启动mysql 服务 
-     -- local srv_mysql = skynet.newservice("srv_mysql")
-     -- cluster.register("srv_mysql", srv_mysql)
-     -- skynet.call(".mysql", "lua", "init", "login", config_mysql["login"]) 
+    --local srv_mysql = skynet.newservice("srv_mysql")
+    local srv_mysql = center.start_hotfix_service("skynet", "srv_mysql")
+    cluster.register("srv_mysql", srv_mysql)
+    skynet.call(".mysql", "lua", "init", "login", config_mysql["login"]) 
 
 
     
@@ -72,27 +73,6 @@ skynet.start(function ()
     local gateserver = config_server.game_100.gateserver    
     skynet.call(srv_net_gate, "lua", "start",gateserver )
     
-    
-    
-    
---    hotfix.start_hotfix_service("skynet", "srv_web", backend_port, "gate.backend.webapp", 65536)
---    hotfix.start_hotfix_service("skynet", "srv_web", frontend_port, "gate.frontend.webapp", 65536 * 2)
-    -- 启动socket服务
---    local maxclient = 30000
---    local socket = config.etcdcf.frontend.socket
---    local handle = hotfix.start_hotfix_service("skynet","srv_socket")
---    skynet.call(handle, "lua", "start", 
---        {
---            port = socket,
---            maxclient = maxclient,
---            nodelay = true,
---        },
---        "gate.frontend.app"
---    )
-
-    -- 注册服务
---    local handle = hotfix.start_hotfix_service("skynetunique", "srv_register_agent")
---    skynet.call(handle, "lua", "set", config.etcdfile, config.etcdcf)
 
     skynet.exit()
 end)
