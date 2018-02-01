@@ -97,6 +97,14 @@ end
 
 
 skynet.start(function ( ... )
+    --[[
+    skynet.name(name, address)：为一个地址命名。skynet.name(name, skynet.self()) 和 skynet.register(name) 功能等价。
+            注意：这个名字一旦注册，是在 skynet 系统中通用的，你需要自己约定名字的管理的方法。
+            以 . 开头的名字是在同一skynet节点下有效的，跨节点的 skynet 服务对别的节点下的 . 开头的名字不可见。不同的 skynet 节点可以定义相同的 . 开头的名字。
+            以字母开头的名字在整个 skynet 网络中都有效，你可以通过这种全局名字把消息发到其它节点的。
+            原则上，不鼓励滥用全局名字，它有一定的管理成本。管用的方法是在业务层交换服务的数字地址，让服务自行记住其它服务的地址来传播消息。
+
+    ]]
     skynet.name(".mysql", skynet.self())
 
     skynet.dispatch("lua", function(session, _, command, ...)

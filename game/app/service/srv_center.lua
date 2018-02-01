@@ -28,6 +28,7 @@ local function start_service(type, service_name, ...)
     end
     
     --存储所有
+    --all_service[#all_service+1] = 
     table.insert(all_service, {type, handle, service_name, {...}})
     
     return handle
@@ -72,6 +73,14 @@ function CMD.start_reboot_service(_type, service_name, ...)
     end
     return handle
 end
+
+
+
+--获取指定服务列表
+function CMD.getServer(servername)
+    return all_service[servername]
+end
+
 
 
 

@@ -41,7 +41,7 @@ skynet.start(function ()
 
      --启动mysql 服务 
     --local srv_mysql = skynet.newservice("srv_mysql")
-    local srv_mysql = center.start_hotfix_service("skynet", "srv_mysql")
+    local srv_mysql = center.start_reboot_service("skynet", "srv_mysql")
     cluster.register("srv_mysql", srv_mysql)
     skynet.call(".mysql", "lua", "init", "login", config_mysql["login"]) 
 
